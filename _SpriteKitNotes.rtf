@@ -1,0 +1,141 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2821
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww18200\viewh12220\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\b\fs28 \cf0 \expnd0\expndtw0\kerning0
+https://youtu.be/qraQnVr-mYk?si=BCZIcGoIrrRhwFdC
+\f1\b0 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \
+Convert to landscape mode only:\
+- Remove gameScene.sks\
+\
+------------------------------\
+\pard\pardeftab720\partightenfactor0
+
+\f0\b \cf0 SKAction:\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b0 \cf0 ------------------------------\
+// Actions that move: \
+moveByX\
+moveBy\
+moveTo\
+moveTx\
+\'85\
+\pard\pardeftab720\partightenfactor0
+
+\f0\b \cf0 // Actions that scale: 
+\f1\b0 \
+scaleBy\
+scaleTo\
+scaleXBy\
+..\
+
+\f0\b // Actions that rotate:
+\f1\b0 \
+- rotateByAngle: duration\
+-rotateToAngle: duration\
+\
+------------------------------\
+
+\f0\b // Action Sequences: 
+\f1\b0 \
+------------------------------\
+// 1\
+let actionMidMove = SKAction.moveTo( \
+	CGPoint(x: size.width/2, y: CGRectGetMinY(playableRect) + enemy.size.height/2), duration: 1.0)\
+// 2\
+let actionMove = SKAction.moveTo(\
+	CGPoint(x: -enemy.size.width/2, y: enemy.position.y), duration: 1.0)\
+)\
+\
+// 3 \
+let 
+\f0\b sequence
+\f1\b0  = SKAction.sequence( [actionMidMove, actionMove]) \
+\
+// \
+enemy.runAction(sequence)\
+\
+\
+------------------------------\
+
+\f0\b // Run Block Action: 
+\f1\b0 \
+------------------------------\
+let logMessage = SKAction.runBlock() \{\
+	print(\'93Reached Bottom\'94)\
+\} \
+\
+\
+let sequence = SKAction.sequence(\
+	[actionMidMove, logMessage, wait, actionMove ]\
+) \
+\
+\
+\
+\
+\
+------------------------------\
+
+\f0\b // Animation Actions
+\f1\b0 \
+-----------------------------\
+Var textures:[SKTexture ] = [ ]\
+For I in 1\'854 \{\
+	textures.append(SKTexture(SKTexture(imageNamed: \'93zombie\\(i)\'94)) )\
+\}\
+\
+Textures.append(textures[2])\
+Textures.append(textures[1])\
+\
+zombieAnimation = SKAction.animateWithTextures(textures, timePerfFame: 0.1)\
+ \
+\
+\
+\
+\
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 ------------------------------\
+
+\f0\b // Simple Collision Detection 
+\f1\b0 \
+-----------------------------\
+\
+Var hitEnemies: [SKSpriteNode] = [ ]\
+enumerateChildNodesWithName(\'93enemy\'94) \{ node, _ in\
+	let enemy = node as! SKSpriteNode\
+	if CGRectIntersectsRect(\
+		CGRectInset(node.frame, 20, 20), self.zombie.frame) \{\
+		hitEnemies.append(enemy)\
+	\}\
+	for enemy in hitEnemies \{\
+		zombieHitEnemy(enemy)\
+	\}\
+\}\
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 \
+ \
+ \
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}
